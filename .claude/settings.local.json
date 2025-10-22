@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//e/CMC/rust_projects/gdserial/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,6 +1,12 @@
-# BlueDot - Bluetooth LE for Godot
+<div align="center">
+  <img src="bluedot.jpg" alt="BlueDot Logo" width="200"/>
 
-A simple, Pythonic Bluetooth LE (BLE) extension for Godot 4, built with Rust using gdext and btleplug.
+  # BlueDot - Bluetooth LE for Godot
+
+  A simple, Pythonic Bluetooth LE (BLE) extension for Godot 4, built with Rust using gdext and btleplug.
+
+  **⚠️ Experimental / In Development** - This project is in early development and the API may change.
+</div>
 
 ## Features
 

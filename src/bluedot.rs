@@ -63,7 +63,7 @@ impl BlueDot {
     /// timeout_seconds: How long to scan (default: 5 seconds)
     /// Returns an array of BLEDevice objects
     #[func]
-    fn scan(&self, #[opt] timeout_seconds: f32) -> Array<Gd<BLEDevice>> {
+    fn scan(&self, timeout_seconds: f32) -> Array<Gd<BLEDevice>> {
         let timeout = if timeout_seconds <= 0.0 { 5.0 } else { timeout_seconds };
         let mut devices = Array::new();
 
@@ -96,7 +96,7 @@ impl BlueDot {
                         let device = Gd::from_init_fn(|base| {
                             BLEDevice::from_peripheral(base, peripheral, self.runtime.clone())
                         });
-                        devices.push(device);
+                        devices.push(&device);
                     }
                 }
                 Err(e) => {

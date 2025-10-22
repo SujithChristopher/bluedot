@@ -1,6 +1,6 @@
 use godot::prelude::*;
 use godot::classes::{RefCounted, IRefCounted};
-use btleplug::api::{Peripheral as _, WriteType, Characteristic};
+use btleplug::api::{Peripheral as _, WriteType};
 use btleplug::platform::Peripheral;
 use std::sync::{Arc, Mutex};
 use tokio::runtime::Runtime;
@@ -43,7 +43,7 @@ impl BLEDevice {
                     if let Some(local_name) = props.local_name {
                         name = GString::from(local_name.as_str());
                     }
-                    address = GString::from(props.address.to_string());
+                    address = GString::from(props.address.to_string().as_str());
                 }
             }
         }
@@ -287,7 +287,7 @@ impl BLEDevice {
         let mut seen_services = std::collections::HashSet::new();
         for char in characteristics {
             if seen_services.insert(char.service_uuid) {
-                services.push(GString::from(char.service_uuid.to_string()));
+                services.push(char.service_uuid.to_string().as_str());
             }
         }
 
@@ -320,7 +320,7 @@ impl BLEDevice {
 
         for char in characteristics {
             if char.service_uuid == service_uuid {
-                chars.push(GString::from(char.uuid.to_string()));
+                chars.push(char.uuid.to_string().as_str());
             }
         }
 

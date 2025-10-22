@@ -1,7 +1,10 @@
 {
   "permissions": {
     "allow": [
-      "Read(//e/CMC/rust_projects/gdserial/**)"
+      "Read(//e/CMC/rust_projects/gdserial/**)",
+      "Bash(cargo check:*)",
+      "Bash(cargo build:*)",
+      "Bash(copy /Y \"target\\x86_64-pc-windows-msvc\\release\\bluedot.dll\" \"addons\\bluedot\\bin\\windows-x86_64\\bluedot.dll\")"
     ],
     "deny": [],
     "ask": []

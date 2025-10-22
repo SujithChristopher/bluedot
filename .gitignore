@@ -8,3 +8,4 @@ Cargo.lock
 .idea/
 addons/bluedot/bin/
 .godot/
+.claude/

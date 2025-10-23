@@ -1,27 +1,27 @@
 extends Node
 
-# Example usage of BlueDot for Bluetooth LE communication
+# Example usage of GdBLE for Bluetooth LE communication
 
-var bluedot: BlueDot
+var gdble: GdBLE
 var devices: Array = []
 var connected_device: BLEDevice = null
 
 func _ready():
-	# Create BlueDot instance
-	bluedot = BlueDot.new()
+	# Create GdBLE instance
+	gdble = GdBLE.new()
 
 	# Initialize Bluetooth LE
-	if bluedot.initialize():
-		print("BlueDot initialized successfully!")
+	if gdble.initialize():
+		print("GdBLE initialized successfully!")
 		scan_for_devices()
 	else:
-		print("Failed to initialize BlueDot")
+		print("Failed to initialize GdBLE")
 
 func scan_for_devices():
 	print("Scanning for BLE devices...")
 
 	# Scan for 5 seconds
-	devices = bluedot.scan(5.0)
+	devices = gdble.scan(5.0)
 
 	print("Found %d devices:" % devices.size())
 	for device in devices:

@@ -1,0 +1,23 @@
+[configuration]
+
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.2
+
+[libraries]
+
+linux.debug.x86_64 =     "res://addons/gdble/bin/linux-x86_64/libgdble.so"
+linux.release.x86_64 =   "res://addons/gdble/bin/linux-x86_64/libgdble.so"
+linux.debug.arm64 =      "res://addons/gdble/bin/linux-arm64/libgdble.so"
+linux.release.arm64 =    "res://addons/gdble/bin/linux-arm64/libgdble.so"
+windows.debug.x86_64 =   "res://addons/gdble/bin/windows-x86_64/gdble.dll"
+windows.release.x86_64 = "res://addons/gdble/bin/windows-x86_64/gdble.dll"
+windows.debug.arm64 =    "res://addons/gdble/bin/windows-arm64/gdble.dll"
+windows.release.arm64 =  "res://addons/gdble/bin/windows-arm64/gdble.dll"
+macos.debug.x86_64 =     "res://addons/gdble/bin/macos-x86_64/libgdble.dylib"
+macos.release.x86_64 =   "res://addons/gdble/bin/macos-x86_64/libgdble.dylib"
+macos.debug.arm64 =      "res://addons/gdble/bin/macos-arm64/libgdble.dylib"
+macos.release.arm64 =    "res://addons/gdble/bin/macos-arm64/libgdble.dylib"
+
+[documentation]
+
+en = "res://addons/gdble/doc/en/"

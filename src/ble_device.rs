@@ -89,23 +89,23 @@ impl BLEDevice {
 
             match result {
                 Ok(_) => {
-                    godot_print!("BlueDot: Connected to {}", self.name);
+                    godot_print!("GdBLE: Connected to {}", self.name);
                     self.is_connected = true;
 
                     // Discover services automatically
                     if let Err(e) = rt.block_on(peripheral.discover_services()) {
-                        godot_error!("BlueDot: Failed to discover services: {}", e);
+                        godot_error!("GdBLE: Failed to discover services: {}", e);
                     }
 
                     true
                 }
                 Err(e) => {
-                    godot_error!("BlueDot: Connection failed: {}", e);
+                    godot_error!("GdBLE: Connection failed: {}", e);
                     false
                 }
             }
         } else {
-            godot_error!("BlueDot: Runtime not available");
+            godot_error!("GdBLE: Runtime not available");
             false
         }
     }
@@ -123,12 +123,12 @@ impl BLEDevice {
 
             match result {
                 Ok(_) => {
-                    godot_print!("BlueDot: Disconnected from {}", self.name);
+                    godot_print!("GdBLE: Disconnected from {}", self.name);
                     self.is_connected = false;
                     true
                 }
                 Err(e) => {
-                    godot_error!("BlueDot: Disconnection failed: {}", e);
+                    godot_error!("GdBLE: Disconnection failed: {}", e);
                     false
                 }
             }
@@ -151,7 +151,7 @@ impl BLEDevice {
     #[func]
     fn write(&self, service_uuid: GString, characteristic_uuid: GString, data: PackedByteArray) -> bool {
         if !self.is_connected {
-            godot_error!("BlueDot: Device not connected");
+            godot_error!("GdBLE: Device not connected");
             return false;
         }
 
@@ -161,7 +161,7 @@ impl BLEDevice {
         let service_uuid = match Uuid::parse_str(&service_uuid_str) {
             Ok(uuid) => uuid,
             Err(e) => {
-                godot_error!("BlueDot: Invalid service UUID: {}", e);
+                godot_error!("GdBLE: Invalid service UUID: {}", e);
                 return false;
             }
         };
@@ -169,7 +169,7 @@ impl BLEDevice {
         let char_uuid = match Uuid::parse_str(&char_uuid_str) {
             Ok(uuid) => uuid,
             Err(e) => {
-                godot_error!("BlueDot: Invalid characteristic UUID: {}", e);
+                godot_error!("GdBLE: Invalid characteristic UUID: {}", e);
                 return false;
             }
         };
@@ -193,11 +193,11 @@ impl BLEDevice {
 
             match result {
                 Ok(_) => {
-                    godot_print!("BlueDot: Write successful");
+                    godot_print!("GdBLE: Write successful");
                     true
                 }
                 Err(e) => {
-                    godot_error!("BlueDot: Write failed: {}", e);
+                    godot_error!("GdBLE: Write failed: {}", e);
                     false
                 }
             }
@@ -215,7 +215,7 @@ impl BLEDevice {
         let mut result = PackedByteArray::new();
 
         if !self.is_connected {
-            godot_error!("BlueDot: Device not connected");
+            godot_error!("GdBLE: Device not connected");
             return result;
         }
 
@@ -225,7 +225,7 @@ impl BLEDevice {
         let service_uuid = match Uuid::parse_str(&service_uuid_str) {
             Ok(uuid) => uuid,
             Err(e) => {
-                godot_error!("BlueDot: Invalid service UUID: {}", e);
+                godot_error!("GdBLE: Invalid service UUID: {}", e);
                 return result;
             }
         };
@@ -233,7 +233,7 @@ impl BLEDevice {
         let char_uuid = match Uuid::parse_str(&char_uuid_str) {
             Ok(uuid) => uuid,
             Err(e) => {
-                godot_error!("BlueDot: Invalid characteristic UUID: {}", e);
+                godot_error!("GdBLE: Invalid characteristic UUID: {}", e);
                 return result;
             }
         };
@@ -256,13 +256,13 @@ impl BLEDevice {
 
             match read_result {
                 Ok(data) => {
-                    godot_print!("BlueDot: Read {} bytes", data.len());
+                    godot_print!("GdBLE: Read {} bytes", data.len());
                     for byte in data {
                         result.push(byte);
                     }
                 }
                 Err(e) => {
-                    godot_error!("BlueDot: Read failed: {}", e);
+                    godot_error!("GdBLE: Read failed: {}", e);
                 }
             }
         }
@@ -277,7 +277,7 @@ impl BLEDevice {
         let mut services = PackedStringArray::new();
 
         if !self.is_connected {
-            godot_error!("BlueDot: Device not connected");
+            godot_error!("GdBLE: Device not connected");
             return services;
         }
 
@@ -302,7 +302,7 @@ impl BLEDevice {
         let mut chars = PackedStringArray::new();
 
         if !self.is_connected {
-            godot_error!("BlueDot: Device not connected");
+            godot_error!("GdBLE: Device not connected");
             return chars;
         }
 
@@ -310,7 +310,7 @@ impl BLEDevice {
         let service_uuid = match Uuid::parse_str(&service_uuid_str) {
             Ok(uuid) => uuid,
             Err(e) => {
-                godot_error!("BlueDot: Invalid service UUID: {}", e);
+                godot_error!("GdBLE: Invalid service UUID: {}", e);
                 return chars;
             }
         };

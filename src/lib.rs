@@ -1,9 +1,9 @@
 use godot::prelude::*;
 
-mod bluedot;
+mod gdble;
 mod ble_device;
 
-struct BlueDotExtension;
+struct GdBLEExtension;
 
 #[gdextension]
-unsafe impl ExtensionLibrary for BlueDotExtension {}
+unsafe impl ExtensionLibrary for GdBLEExtension {}

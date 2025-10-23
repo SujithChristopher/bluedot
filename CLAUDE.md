@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-BlueDot is a Rust-based Bluetooth LE (BLE) GDExtension for Godot 4.2+. It provides a simple, Pythonic API for scanning, connecting to, and communicating with Bluetooth LE devices. Built using:
+GdBLE is a Rust-based Bluetooth LE (BLE) GDExtension for Godot 4.2+. It provides a simple, Pythonic API for scanning, connecting to, and communicating with Bluetooth LE devices. Built using:
 - **gdext**: Rust bindings for Godot 4
 - **btleplug**: Cross-platform Bluetooth LE library
 - **tokio**: Async runtime for BLE operations
@@ -15,13 +15,13 @@ BlueDot is a Rust-based Bluetooth LE (BLE) GDExtension for Godot 4.2+. It provid
 ```bash
 build.bat
 ```
-Builds for x86_64-pc-windows-msvc target and copies `bluedot.dll` to `addons/bluedot/bin/windows-x86_64/`
+Builds for x86_64-pc-windows-msvc target and copies `gdble.dll` to `addons/gdble/bin/windows-x86_64/`
 
 ### Linux/macOS
 ```bash
 ./build.sh
 ```
-Auto-detects platform (Linux/macOS) and architecture (x86_64/arm64), builds the appropriate target, and copies the library to the correct `addons/bluedot/bin/{platform}/` directory.
+Auto-detects platform (Linux/macOS) and architecture (x86_64/arm64), builds the appropriate target, and copies the library to the correct `addons/gdble/bin/{platform}/` directory.
 
 ### Manual Build
 ```bash
@@ -33,14 +33,14 @@ cargo build --release --target <target-triple>
 ### GDExtension Structure
 
 The project follows the standard GDExtension addon pattern:
-- **Extension entry point**: `src/lib.rs` defines `BlueDotExtension` with the `#[gdextension]` macro
+- **Extension entry point**: `src/lib.rs` defines `GdBLEExtension` with the `#[gdextension]` macro
 - **Library type**: `cdylib` (dynamic library) specified in `Cargo.toml`
 - **Entry symbol**: `gdext_rust_init` - called by Godot when loading the extension
-- **Addon location**: `addons/bluedot/` contains the `.gdextension` file and platform-specific binaries
+- **Addon location**: `addons/gdble/` contains the `.gdextension` file and platform-specific binaries
 
 ### Core Classes
 
-**BlueDot** (`src/bluedot.rs`):
+**GdBLE** (`src/gdble.rs`):
 - Main entry point for BLE operations
 - Manages the tokio runtime and btleplug Manager
 - Methods: `initialize()`, `scan()`, `is_initialized()`
@@ -50,22 +50,22 @@ The project follows the standard GDExtension addon pattern:
 - Represents an individual BLE peripheral
 - Wraps btleplug's `Peripheral` type
 - Methods: `connect()`, `disconnect()`, `read()`, `write()`, `get_services()`, `get_characteristics()`
-- Shares the tokio runtime from BlueDot for async operations
+- Shares the tokio runtime from GdBLE for async operations
 
 ### Async/Runtime Handling
 
 The extension uses a **blocking pattern** over async:
-1. BlueDot creates a tokio Runtime on `initialize()`
+1. GdBLE creates a tokio Runtime on `initialize()`
 2. Runtime is stored in `Arc<Mutex<Option<Runtime>>>` and shared with BLEDevice instances
 3. All async BLE operations use `runtime.block_on()` to convert async to sync
 4. This pattern allows GDScript to call synchronous methods that internally handle async BLE operations
 
 ### Library Paths
 
-The `.gdextension` file uses platform-specific paths pointing to `res://addons/bluedot/bin/{platform}/`:
-- Windows: `windows-x86_64/bluedot.dll`, `windows-arm64/bluedot.dll`
-- Linux: `linux-x86_64/libbluedot.so`, `linux-arm64/libbluedot.so`
-- macOS: `macos-x86_64/libbluedot.dylib`, `macos-arm64/libbluedot.dylib`
+The `.gdextension` file uses platform-specific paths pointing to `res://addons/gdble/bin/{platform}/`:
+- Windows: `windows-x86_64/gdble.dll`, `windows-arm64/gdble.dll`
+- Linux: `linux-x86_64/libgdble.so`, `linux-arm64/libgdble.so`
+- macOS: `macos-x86_64/libgdble.dylib`, `macos-arm64/libgdble.dylib`
 
 Both debug and release builds use the same binary paths (no separate debug builds deployed).
 

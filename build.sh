@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build script for BlueDot GDExtension
+# Build script for GdBLE GDExtension
 
 set -e
 
@@ -12,29 +12,29 @@ echo "Detected platform: $OS $ARCH"
 if [ "$OS" = "Linux" ]; then
     if [ "$ARCH" = "x86_64" ]; then
         TARGET="x86_64-unknown-linux-gnu"
-        BIN_DIR="addons/bluedot/bin/linux-x86_64"
-        LIB_NAME="libbluedot.so"
+        BIN_DIR="addons/gdble/bin/linux-x86_64"
+        LIB_NAME="libgdble.so"
     elif [ "$ARCH" = "aarch64" ]; then
         TARGET="aarch64-unknown-linux-gnu"
-        BIN_DIR="addons/bluedot/bin/linux-arm64"
-        LIB_NAME="libbluedot.so"
+        BIN_DIR="addons/gdble/bin/linux-arm64"
+        LIB_NAME="libgdble.so"
     fi
 elif [ "$OS" = "Darwin" ]; then
     if [ "$ARCH" = "x86_64" ]; then
         TARGET="x86_64-apple-darwin"
-        BIN_DIR="addons/bluedot/bin/macos-x86_64"
-        LIB_NAME="libbluedot.dylib"
+        BIN_DIR="addons/gdble/bin/macos-x86_64"
+        LIB_NAME="libgdble.dylib"
     elif [ "$ARCH" = "arm64" ]; then
         TARGET="aarch64-apple-darwin"
-        BIN_DIR="addons/bluedot/bin/macos-arm64"
-        LIB_NAME="libbluedot.dylib"
+        BIN_DIR="addons/gdble/bin/macos-arm64"
+        LIB_NAME="libgdble.dylib"
     fi
 else
     echo "Unsupported platform: $OS"
     exit 1
 fi
 
-echo "Building BlueDot for $TARGET..."
+echo "Building GdBLE for $TARGET..."
 cargo build --release --target $TARGET
 
 echo "Copying library to $BIN_DIR/..."
@@ -45,4 +45,4 @@ echo ""
 echo "Build complete!"
 echo "Library location: $BIN_DIR/$LIB_NAME"
 echo ""
-echo "Copy the entire addons/bluedot/ folder to your Godot project's addons/ directory"
+echo "Copy the entire addons/gdble/ folder to your Godot project's addons/ directory"

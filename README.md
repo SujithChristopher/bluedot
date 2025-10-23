@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="bluedot.jpg" alt="BlueDot Logo" width="200"/>
+  <img src="bluedot.jpg" alt="GdBLE Logo" width="200"/>
 
-  # BlueDot - Bluetooth LE for Godot
+  # GdBLE - Godot Bluetooth LE
 
   A simple, Pythonic Bluetooth LE (BLE) extension for Godot 4, built with Rust using gdext and btleplug.
 
@@ -29,7 +29,7 @@
 1. Clone this repository:
 ```bash
 git clone <your-repo-url>
-cd bluedot
+cd gdble
 ```
 
 2. Build the extension for your platform:
@@ -45,12 +45,12 @@ chmod +x build.sh
 ./build.sh
 ```
 
-The build script will automatically detect your platform and compile the library to the correct location in `addons/bluedot/bin/`.
+The build script will automatically detect your platform and compile the library to the correct location in `addons/gdble/bin/`.
 
 ## Installation
 
-1. Copy the entire `addons/bluedot/` folder to your Godot project's `addons/` directory
-2. Enable the plugin in Godot: **Project → Project Settings → Plugins → BlueDot**
+1. Copy the entire `addons/gdble/` folder to your Godot project's `addons/` directory
+2. Enable the plugin in Godot: **Project → Project Settings → Plugins → GdBLE**
 
 ## Usage
 
@@ -59,18 +59,18 @@ The build script will automatically detect your platform and compile the library
 ```gdscript
 extends Node
 
-var bluedot: BlueDot
+var gdble: GdBLE
 var device: BLEDevice
 
 func _ready():
-    # Initialize BlueDot
-    bluedot = BlueDot.new()
-    if not bluedot.initialize():
-        print("Failed to initialize BlueDot")
+    # Initialize GdBLE
+    gdble = GdBLE.new()
+    if not gdble.initialize():
+        print("Failed to initialize GdBLE")
         return
 
     # Scan for devices (5 seconds)
-    var devices = bluedot.scan(5.0)
+    var devices = gdble.scan(5.0)
 
     # Print found devices
     for d in devices:
@@ -121,7 +121,7 @@ for service in services:
 
 ## API Reference
 
-### BlueDot
+### GdBLE
 
 Main class for managing Bluetooth LE operations.
 
@@ -129,7 +129,7 @@ Main class for managing Bluetooth LE operations.
 
 - `initialize() -> bool`: Initialize the BLE manager. Returns `true` on success.
 - `scan(timeout_seconds: float = 5.0) -> Array[BLEDevice]`: Scan for nearby BLE devices.
-- `is_initialized() -> bool`: Check if BlueDot is initialized.
+- `is_initialized() -> bool`: Check if GdBLE is initialized.
 
 ### BLEDevice
 
